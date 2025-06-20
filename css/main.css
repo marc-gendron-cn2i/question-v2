@@ -13,19 +13,18 @@ body {
 h1 { color: #333; }
 
 /* ===== Layout & Sidebar ===== */
-/* === Layout principal === */
 .layout {
   display: flex;
   min-height: 100vh;
-  align-items: flex-start;  /* aligner sidebar et content en haut */
 }
-
-/* === Sidebar sticky full-height & ombre légère === */
 .sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;             /* toujours faire toute la hauteur */
-  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05); /* ombre plus douce */
+  width: 250px;
+  background: #f8f8f8;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
 }
 .sidebar.collapsed {
   width: 60px;
@@ -148,8 +147,8 @@ h1 { color: #333; }
 /* ===== Page: Analytics ===== */
 .content {
   flex: 1;
-  /* réduire verticalement le padding : 1rem au lieu de 2rem */
-  padding: 1rem 2rem;
+  padding: 2rem;
+  background: #f8f8f8;
 }
 .container {
   width: 100%;
