@@ -1,41 +1,37 @@
 // js/modules/menuOutils.js
-
-// Écouteur unique sur tout le document pour gérer sidebar et sous-menus
 document.addEventListener('click', (e) => {
-  // 1️⃣ Bouton de collapse/expand du sidebar
-  const toggleBtn = e.target.closest('#sidebarToggle');
-  if (toggleBtn) {
+  // 1) bouton de collapse/expand
+  const collapseBtn = e.target.closest('#sidebarToggle');
+  if (collapseBtn) {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('collapsed');
-    const ic = toggleBtn.querySelector('i');
-    ic.classList.toggle('fa-chevron-right');
+
+    const ic = collapseBtn.querySelector('i');
     ic.classList.toggle('fa-chevron-left');
-    // Refermer tous les sous-menus quand on collapse
+    ic.classList.toggle('fa-chevron-right');
+
+    // refermer tous les sous-menus si collapsed
     if (sidebar.classList.contains('collapsed')) {
-      document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+      sidebar.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
     }
     return;
   }
 
-  // 2️⃣ Boutons de sous-menu (déploiement et navigation)
-  const btn = e.target.closest('.menu-toggle');
-  if (btn) {
-    // Si data-url, redirection directe
-    const url = btn.dataset.url;
+  // 2) menu-toggle (chevrons + navigation)
+  const mt = e.target.closest('.menu-toggle');
+  if (mt) {
+    // navigation directe
+    const url = mt.dataset.url;
     if (url) {
-      if (window.location.pathname !== url) {
-        window.location.href = url;
-      }
+      if (location.pathname !== url) location.href = url;
       return;
     }
-    // Sinon, toggle du sous-menu
-    const sub = btn.nextElementSibling;
-    sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
-    const ic = btn.querySelector('.toggle-icon');
-    if (ic) {
-      ic.classList.toggle('fa-chevron-up');
-      ic.classList.toggle('fa-chevron-down');
-    }
+    // toggle du sous-menu
+    const sub = mt.nextElementSibling;
+    sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+
+    const ic = mt.querySelector('.toggle-icon');
+    ic.classList.toggle('fa-chevron-down');
+    ic.classList.toggle('fa-chevron-up');
   }
 });
-
