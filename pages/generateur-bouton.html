@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Générateur de bouton Shorthand</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&family=Crimson+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="sidebar"></div>
+
+  <main class="content">
+    <div class="container">
+      <h1>Générateur de bouton Shorthand</h1>
+      <!-- Générateur content (conserve les mêmes éléments) -->
+      <!-- ... -->
+    </div>
+  </main>
+
+  <!-- Sidebar include -->
+  <script>
+    fetch('/includes/sidebar.html')
+      .then(r => r.text())
+      .then(html => document.getElementById('sidebar').innerHTML = html);
+  </script>
+  <!-- App JS -->
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
