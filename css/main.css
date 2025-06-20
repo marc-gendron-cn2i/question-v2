@@ -351,3 +351,65 @@ select {
   margin-top: 1rem;
   font-weight: 600;
 }
+
+/* ──────── Ajustements finaux ──────── */
+
+/* 1) Aucun soulignement sur "Outils numériques" ni icône */
+.sidebar-header,
+.menu-toggle {
+  text-decoration: none;
+}
+
+/* 2) Sidebar toujours visible (toggle inside) */
+.sidebar {
+  overflow: visible; /* ne clippe plus le bouton */
+}
+.sidebar.collapsed .sidebar-toggle-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 3) Chevron du sous-menu vers le haut par défaut */
+.menu-toggle .toggle-icon {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* 4) Boutons rouges (#D51D2C), sauf le toggle du sidebar */
+button:not(.sidebar-toggle-btn),
+input[type="button"],
+input[type="submit"] {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+/* 5) Champs et chiffres en Red Hat Display */
+input, select, textarea, .results-box, .user-entry, .bar {
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+/* 6) Champ Question moins haut mais redimensionnable */
+.content textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 7) Champs Heure de début & fin same size que date */
+.inline-inputs input[type="time"],
+.inline-inputs input[type="date"] {
+  flex: 1;
+  padding: 10px;
+}
+
+/* 8) Champs Option même hauteur que textarea */
+.option-row input {
+  padding: 10px;
+  height: calc(1.5em + 1rem); /* correspond à line-height 1.5 + padding top/bottom */
+  font-family: 'Red Hat Display', sans-serif;
+}
