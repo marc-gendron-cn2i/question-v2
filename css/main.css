@@ -4,11 +4,9 @@
   --bg-light: #eee;
   --border: #ccc;
 }
-
 html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
 }
 body {
   font-family: 'Red Hat Display', sans-serif;
@@ -16,27 +14,21 @@ body {
   color: #333;
   line-height: 1.5;
 }
-h1 {
-  color: #333;
-}
+h1 { color: #333; }
 
 /* ===== Layout & Sidebar ===== */
 .layout {
   display: flex;
-  align-items: flex-start; /* aligne sidebar et contenu en haut */
+  align-items: flex-start;
 }
-
 .sidebar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100vh; /* pleine hauteur */
+  top: 0; left: 0;
+  width: 250px; height: 100vh;
   background: #f8f8f8;
   border-right: 1px solid #ddd;
-  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 1px 0 5px rgba(0,0,0,0.05);
+  display: flex; flex-direction: column;
   transition: width 0.3s ease;
   z-index: 1000;
 }
@@ -161,12 +153,13 @@ h1 {
 /* ===== Main Content ===== */
 .content {
   flex: 1;
-  margin-left: 250px;   /* prend en compte la largeur du sidebar */
+  margin-left: 250px;
   padding: 1rem 2rem;
   background: #f8f8f8;
+  position: relative; z-index: 0;
 }
 
-/* ===== Shared Components ===== */
+/* ===== Boutons partagés ===== */
 .btn {
   background: var(--primary);
   color: #fff;
@@ -177,7 +170,6 @@ h1 {
   font-size: 16px;
   margin: 1rem 0;
 }
-
 /* ===== Page: Analytics ===== */
 .container {
   width: 100%;
