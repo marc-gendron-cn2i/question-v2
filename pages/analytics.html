@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Analyse des sondages</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="sidebar"></div>
+
+  <main class="content">
+    <div class="container">
+      <h1>Résultats des sondages</h1>
+      <div class="inline-inputs">
+        <div>
+          <label for="site">Site</label>
+          <select id="site">
+            <option value="lesoleil">Le Soleil</option>
+            <option value="ledroit">Le Droit</option>
+            <option value="lenouvelliste">Le Nouvelliste</option>
+            <option value="lequotidien">Le Quotidien</option>
+            <option value="latribune">La Tribune</option>
+            <option value="lavoixdelest">La Voix de l'Est</option>
+          </select>
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" />
+        </div>
+      </div>
+      <button class="btn" id="loadData">Afficher les données</button>
+      <div class="results-box" id="resultsContainer">
+        <div style="color:#888;">Sélectionnez un site et une date.</div>
+      </div>
+      <canvas id="hourlyChart" height="120" style="margin-top:2rem;"></canvas>
+    </div>
+  </main>
+
+  <!-- Sidebar include -->
+  <script>
+    fetch('/includes/sidebar.html')
+      .then(r => r.text())
+      .then(html => document.getElementById('sidebar').innerHTML = html);
+  </script>
+  <!-- App JS -->
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
