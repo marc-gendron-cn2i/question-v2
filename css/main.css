@@ -466,3 +466,44 @@ select,
 input, select, textarea {
   font-family: 'Red Hat Display', sans-serif !important;
 }
+/* ─── Réinitialisation du style de .menu-toggle et .remove-option ─── */
+
+/* 1) Menu-toggle redevient “plat” */
+button.menu-toggle {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: #333 !important;
+}
+button.menu-toggle > i {
+  color: var(--primary) !important;
+}
+button.menu-toggle:hover {
+  background: rgba(0,0,0,0.05) !important;
+}
+
+/* 2) Sous-menu : on garde le padding habituel, pas de fond rouge */
+.submenu {
+  background: transparent !important;
+}
+
+/* 3) Bouton “✕” (remove-option) redevient flottant et transparent */
+.remove-option {
+  background: transparent !important;
+  border: none !important;
+  color: var(--primary) !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  font-size: 1.2rem !important;
+}
+
+/* 4) Assurez-vous que seuls vos .btn (class) sont rouges */
+.btn {
+  background: var(--primary);
+  color: #fff;
+}
+button:not(.btn):not(.menu-toggle):not(#sidebarToggle) {
+  background: none !important;
+}
+
