@@ -413,3 +413,56 @@ input, select, textarea, .results-box, .user-entry, .bar {
   height: calc(1.5em + 1rem); /* correspond à line-height 1.5 + padding top/bottom */
   font-family: 'Red Hat Display', sans-serif;
 }
+
+/* ─── Révisions menu, options & toggle ─── */
+
+/* 1) Retrait de la rotation automatique sur le chevron */
+.menu-toggle .toggle-icon {
+  transform: none !important;
+}
+
+/* 2) Remove-button : même look qu’à l’origine */
+.remove-option {
+  background: transparent;
+  border: none;
+  color: #D51D2C;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* 3) Hauteur des inputs date/time et options identique */
+input[type="date"],
+input[type="time"],
+select,
+.option-row input {
+  height: 44px;           /* correspond à 10px de padding + 1.5em de text */
+  box-sizing: border-box; /* inclut le padding dans la hauteur */
+}
+
+/* 4) Collapse-btn toujours à l’intérieur */
+.sidebar-footer {
+  position: relative;
+}
+.sidebar-toggle-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+.sidebar.collapsed .sidebar-toggle-btn {
+  display: flex;  /* toujours visible même quand collapsed */
+}
+
+/* 5) Rétablir le style “catégorie” du menu */
+.menu-toggle {
+  font-weight: normal;    /* ou bold si c’était avant */
+  text-transform: none;   /* pas de majuscules forcées */
+}
+.menu-toggle > i {
+  margin-right: .75rem;
+}
+
+/* 6) Police Red Hat Display sur tous les champs */
+input, select, textarea {
+  font-family: 'Red Hat Display', sans-serif !important;
+}
