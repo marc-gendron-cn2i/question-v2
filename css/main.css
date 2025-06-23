@@ -555,4 +555,50 @@ button.btn {
   font-size: 16px;
   font-family: 'Red Hat Display', sans-serif;
 }
+/* ──────── Derniers ajustements ──────── */
+
+/* 1) Boutons des formulaires en rouge */
+button:not(.sidebar-toggle-btn):not(.menu-toggle):not(.remove-option) {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border: none !important;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+/* 2) “Outils numériques” reste noir, jamais violet ni souligné */
+.sidebar-header,
+.sidebar-header:link,
+.sidebar-header:visited {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+/* 3) Chevron visible uniquement quand menu ouvert */
+.sidebar.collapsed .toggle-icon {
+  display: none !important;
+}
+.sidebar:not(.collapsed) .toggle-icon {
+  display: inline-block !important;
+}
+
+/* 4) Icônes parfaitement centrées quand sidebar réduit */
+.sidebar.collapsed .sidebar-header,
+.sidebar.collapsed .menu-toggle {
+  justify-content: center !important;
+}
+.sidebar.collapsed .sidebar-header > .logo-icon,
+.sidebar.collapsed .menu-toggle > i {
+  margin: 0 !important;
+}
+
+/* 5) Alignement vertical des icons */
+.sidebar-header,
+.menu-toggle {
+  align-items: center;
+}
+
+/* 6) Police Red Hat Display partout dans les champs */
+input, select, textarea, .results-box, .user-entry {
+  font-family: 'Red Hat Display', sans-serif !important;
+}
 
