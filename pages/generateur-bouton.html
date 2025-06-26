@@ -11,18 +11,22 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+  <!-- Sidebar -->
   <aside id="sidebar" class="sidebar"></aside>
 
+  <!-- Main content -->
   <main class="content">
     <div class="container">
       <h1>Générateur de bouton</h1>
 
       <!-- 1) Checkbox + URL + Texte -->
-      <div class="inline-inputs-bg">
-        <label>
-          <input type="checkbox" id="useBg">
-          Utiliser une image de fond
-        </label>
+      <div class="inline-inputs">
+        <div>
+          <label>
+            <input type="checkbox" id="useBg">
+            Utiliser une image de fond
+          </label>
+        </div>
         <div>
           <label for="buttonUrl">Lien URL du bouton</label>
           <input type="url" id="buttonUrl" placeholder="https://...">
@@ -45,19 +49,25 @@
 
       <!-- 4) Couleurs -->
       <div class="color-row">
-        <label for="bgColor">Couleur du bouton</label>
-        <input type="color" id="bgColor" value="#D51D2C">
-        <input type="text" id="bgColorHex" value="#D51D2C">
-        <label for="textColor">Couleur du texte</label>
-        <input type="color" id="textColor" value="#ffffff">
-        <input type="text" id="textColorHex" value="#ffffff">
+        <div>
+          <label for="bgColor">Couleur du bouton</label>
+          <input type="color" id="bgColor" value="#D51D2C">
+          <input type="text" id="bgColorHex" value="#D51D2C">
+        </div>
+        <div>
+          <label for="textColor">Couleur du texte</label>
+          <input type="color" id="textColor" value="#ffffff">
+          <input type="text" id="textColorHex" value="#ffffff">
+        </div>
       </div>
 
       <!-- 5) Afficher les options avancées -->
-      <a href="#" class="show-advanced-toggle">Afficher les options avancées</a>
+      <div class="advanced-toggle-row">
+        <a href="#" class="show-advanced-toggle">Afficher les options avancées</a>
+      </div>
 
       <!-- 6) Bloc des options avancées (masqué par défaut) -->
-      <div id="advancedOptions" style="display: none;">
+      <div id="advancedOptions" class="advanced-options" style="display: none;">
         <div class="option-row">
           <label for="blur">Flou (%)</label>
           <input type="number" id="blur" min="0" max="100" value="0">
@@ -65,7 +75,7 @@
           <input type="text" id="blockHeight" value="250px">
         </div>
         <div class="option-row">
-          <span>Effet au survol du bouton</span>
+          <span>Effet au survol</span>
           <label><input type="radio" name="hoverEffect" value="darken" checked> Foncé</label>
           <label><input type="radio" name="hoverEffect" value="lighten"> Éclaircir</label>
         </div>
@@ -78,7 +88,7 @@
         <div class="option-row">
           <label for="borderRadius">Border-radius</label>
           <input type="text" id="borderRadius" value="4px">
-          <label for="textSize">Taille texte bouton</label>
+          <label for="textSize">Taille texte</label>
           <input type="text" id="textSize" value="20px">
           <label for="titleSize">Taille titre</label>
           <input type="text" id="titleSize" value="30px">
@@ -99,27 +109,37 @@
       </div>
 
       <!-- 7) Bouton Générer -->
-      <button type="button" class="generate">Générer le code</button>
+      <div class="action-row">
+        <button type="button" class="generate">Générer le code</button>
+      </div>
 
       <!-- 8) Prévisualisation -->
-      <iframe id="buttonPreview" title="Prévisualisation du bouton"></iframe>
+      <div class="preview-row">
+        <label>Prévisualisation du bouton :</label>
+        <iframe id="buttonPreview" title="Prévisualisation"></iframe>
+      </div>
 
       <!-- 9) Bouton Copier -->
-      <button type="button" class="copy">Copier le code</button>
+      <div class="action-row">
+        <button type="button" class="copy">Copier le code</button>
+      </div>
 
       <!-- 10) Code HTML généré -->
-      <label for="htmlOutput">Code HTML</label>
-      <textarea id="htmlOutput" readonly></textarea>
+      <div class="output-row">
+        <label for="htmlOutput">Code HTML</label>
+        <textarea id="htmlOutput" readonly></textarea>
+      </div>
     </div>
   </main>
 
-  <!-- Chargement du sidebar -->
+  <!-- Include Sidebar -->
   <script>
     fetch('/includes/sidebar.html')
       .then(r => r.text())
       .then(html => document.getElementById('sidebar').innerHTML = html);
   </script>
-  <!-- Votre script de génération de bouton -->
+
+  <!-- Votre script de génération de bouton (modifiez le chemin si besoin) -->
   <script type="module" src="/js/buttonGen.js" defer></script>
 </body>
 </html>
