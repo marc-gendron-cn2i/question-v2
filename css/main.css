@@ -288,80 +288,116 @@ select {
   background: #f0f0f0;
 }
 
-/* ===== Page: Générateur de bouton ===== */
-/* ===== Page: Générateur de bouton ===== */
-/* 1) Conteneur centré et max-width */
+/* ==== Générateur de bouton ==== */
 .content .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-row-gap: 1.5rem;
-  grid-column-gap: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* 2) Ligne 1 : checkbox + URL + texte (3 colonnes) */
-.inline-inputs-bg {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* 3) Ligne 2 : zone éditable full-width */
-.editable {
-  grid-column: 1 / -1;
-  min-height: 80px;      /* moins haut par défaut */
-  resize: vertical;      /* peut s’agrandir */
-}
-
-/* 4) Ligne 3 : barres de format full-width */
-.format-buttons {
-  grid-column: 1 / -1;
+/* 1) Trois champs sur une ligne */
+.inline-inputs {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.inline-inputs > div {
+  flex: 1;
 }
 
-/* 5) Ligne 4 : couleur bouton + couleur texte (4 colonnes) */
+/* 2) Barre de mise en forme */
+.format-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.format-buttons button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3) Ligne couleurs */
 .color-row {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: auto 1fr auto 1fr;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+.color-row > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.color-row label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* 4) Toggle avancées */
+.advanced-toggle-row {
+  margin-bottom: 1rem;
+}
+
+/* 5) Boîte options avancées */
+.advanced-options {
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.option-row {
+  display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.option-row label,
+.option-row span {
+  flex-shrink: 0;
+  width: 150px;
 }
 
-/* 6) Lien “Afficher les options avancées” full-width */
-.show-advanced-toggle {
-  grid-column: 1 / -1;
-  margin-top: 0.5rem;
+/* 6) Boutons Générer / Copier */
+.action-row {
+  margin-bottom: 1rem;
+}
+.action-row .btn {
+  margin: 0;
 }
 
-/* 7) Ligne 6 : bouton “Générer le code” full-width */
-.generate {
-  grid-column: 1 / -1;
+/* 7) Prévisualisation */
+.preview-row {
+  margin-bottom: 1rem;
 }
-
-/* 8) Ligne 7 : zone de prévisualisation full-width */
-iframe {
-  grid-column: 1 / -1;
+.preview-row label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.preview-row iframe {
   width: 100%;
-  height: auto;
-  margin: 1rem 0;
+  height: 150px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
 
-/* 9) Ligne 8 : bouton “Copier le code” full-width */
-.copy {
-  grid-column: 1 / -1;
+/* 8) Code HTML */
+.output-row label {
+  display: block;
+  margin-bottom: 0.5rem;
 }
-
-/* 10) Ligne 9 : textarea “Code HTML” full-width */
-textarea {
-  grid-column: 1 / -1;
+.output-row textarea {
   width: 100%;
-  min-height: 200px;
+  height: 150px;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: inherit;
 }
 
 /* ===== Page: Outils numériques ===== */
