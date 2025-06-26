@@ -472,6 +472,20 @@ select {
 .inline-inputs.horizontal {
   flex-direction: row;      /* pour les autres pages qui utilisent une disposition en rangée */
 }
+/* Assure que le lien « Afficher/Cacher les options avancées » reste toujours en rouge */
+#toggleAdvanced,
+#toggleAdvanced:link,
+#toggleAdvanced:visited,
+#toggleAdvanced:hover,
+#toggleAdvanced:active {
+  color: var(--primary) !important;
+  text-decoration: none;
+}
+
+/* Optionnel : souligne au survol pour l’accessibilité */
+#toggleAdvanced:hover {
+  text-decoration: underline;
+}
 
 
 /* ===== Page: Outils numériques ===== */
