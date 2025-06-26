@@ -258,8 +258,8 @@
         <label>Titre au-dessus du bouton</label>
         <div id="overlayTitle" class="editable" contenteditable></div>
         <div class="format-buttons">
-          <button data-cmd="bold"    data-target="overlayTitle"  type="button"><b>G</b></button>
-          <button data-cmd="italic"  data-target="overlayTitle"  type="button"><i>I</i></button>
+          <button data-cmd="bold"     data-target="overlayTitle" type="button"><b>G</b></button>
+          <button data-cmd="italic"   data-target="overlayTitle" type="button"><i>I</i></button>
           <button data-cmd="underline" data-target="overlayTitle" type="button"><u>S</u></button>
         </div>
       </div>
@@ -321,11 +321,13 @@
         <input type="text" id="titleSpacing" value="20px">
 
         <!-- Bouton Générer à l’intérieur du panel avancé -->
-        <button class="generate" type="button">Générer le code</button>
+        <button id="generateInside" class="generate" type="button">
+          Générer le code
+        </button>
       </div>
 
-      <!-- Lorsqu’avancées fermées, on génère ici -->
-      <button class="generate" type="button" id="generateOutside">
+      <!-- Bouton Générer hors du panel avancé -->
+      <button id="generateOutside" class="generate" type="button">
         Générer le code
       </button>
 
@@ -340,33 +342,44 @@
   </main>
 
   <script>
-    // Toggle options avancées + active class
     document.addEventListener('DOMContentLoaded', function() {
-      const toggleLink   = document.getElementById('advancedOptionsToggle');
-      const advanced     = document.getElementById('advancedOptions');
-      const genInside    = advanced.querySelector('.generate');
-      const genOutside   = document.getElementById('generateOutside');
+      const toggleLink  = document.getElementById('advancedOptionsToggle');
+      const advanced    = document.getElementById('advancedOptions');
+      const genOutside  = document.getElementById('generateOutside');
+      const genInside   = document.getElementById('generateInside');
       let visible = false;
 
-      toggleLink.onclick = function(e) {
+      // Si un élément manque, on ne plante pas
+      if (!toggleLink || !advanced || !genOutside || !genInside) return;
+
+      // État initial
+      genInside.style.display  = 'none';
+      genOutside.style.display = 'block';
+
+      // Toggle du panneau
+      toggleLink.addEventListener('click', function(e) {
         e.preventDefault();
         visible = !visible;
+
         advanced.style.display = visible ? 'block' : 'none';
         toggleLink.textContent = visible
           ? 'Cacher les options avancées'
           : 'Afficher les options avancées';
         toggleLink.classList.toggle('active', visible);
 
-        // On n'affiche qu'un seul bouton Générer
         genInside.style.display  = visible ? 'block' : 'none';
         genOutside.style.display = visible ? 'none'  : 'block';
-      };
+      });
 
-      // État initial
-      genInside.style.display  = 'none';
-      genOutside.style.display = 'block';
+      // Proxy : le clic intérieur déclenche le clic extérieur
+      genInside.addEventListener('click', function(e) {
+        e.preventDefault();
+        genOutside.click();
+      });
     });
+  </script>
 
+  <script>
     // Sidebar dynamique
     fetch('/includes/sidebar.html')
       .then(r => r.text())
