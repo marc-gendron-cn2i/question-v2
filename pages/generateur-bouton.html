@@ -9,24 +9,370 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <!-- Main CSS -->
   <link rel="stylesheet" href="/css/main.css">
+
+  <style>
+    /* ——————————————————————————————— 
+       CONTENEUR PRINCIPAL 
+    ——————————————————————————————— */
+    .btn-generator-main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0;
+    }
+    .btn-generator-main label {
+      font-weight: 700;
+      margin-top: 1.3rem;
+      display: block;
+    }
+
+    /* ——————————————————————————————— 
+       1. Champs & zones éditables 
+    ——————————————————————————————— */
+    .btn-generator-main input[type="text"],
+    .btn-generator-main input[type="url"],
+    .btn-generator-main input[type="number"],
+    .btn-generator-main select,
+    .btn-generator-main textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      margin: 0.25rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Red Hat Display', sans-serif;
+      box-sizing: border-box;
+    }
+    .btn-generator-main .editable {
+      min-height: 38px;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      background: #fff;
+      margin: 0.25rem 0 1rem;
+    }
+
+    /* ——————————————————————————————— 
+       2. Boutons de formatage (G / I / S) 
+    ——————————————————————————————— */
+    .btn-generator-main .format-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .btn-generator-main .format-buttons button {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      color: #000;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-generator-main .format-buttons button:hover {
+      background: #f0f0f0;
+    }
+
+    /* ——————————————————————————————— 
+       3. Ligne Couleur (bouton & texte) 
+    ——————————————————————————————— */
+    .btn-generator-main .color-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-generator-main .color-input {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0;
+    }
+    .btn-generator-main .color-input label {
+      flex-basis: 110px;
+      font-weight: 700;
+      margin: 0;
+      margin-right: 0.5rem;
+      min-width: 90px;
+    }
+    .btn-generator-main .color-input input[type="color"] {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding: 0;
+      background: none;
+      margin: 0 0.5rem 0 0;
+    }
+    .btn-generator-main .color-input input[type="text"] {
+      width: 100%;
+      margin: 0;
+    }
+
+    /* ——————————————————————————————— 
+       4. Lien “Afficher/Cacher les options avancées” 
+    ——————————————————————————————— */
+    .toggle-link {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      margin: 1rem 0 0.5rem 0;
+      color: #D51D2C;
+      border: 1px solid #D51D2C;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: 'Red Hat Display', sans-serif;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .toggle-link:hover {
+      background: rgba(213,29,44,0.1);
+    }
+    .toggle-link.active {
+      color: #005eb8;
+      border-color: #005eb8;
+    }
+    .toggle-link.active:hover {
+      background: rgba(0,94,184,0.1);
+    }
+
+    /* ——————————————————————————————— 
+       5. Conteneur options avancées 
+    ——————————————————————————————— */
+    #advancedOptions {
+      display: none;
+      background: #f7f7f7;
+      padding: 1rem 1.2rem;
+      border: 1px solid #e2e2e2;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ——————————————————————————————— 
+       6. Boutons Générer / Copier 
+    ——————————————————————————————— */
+    .generate,
+    .copy {
+      display: block;
+      width: 240px;
+      padding: 0.9rem 1.4rem;
+      margin: 1rem 0;
+      background: #D51D2C;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Red Hat Display', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .generate:hover,
+    .copy:hover {
+      background: #C21A26;
+    }
+
+    /* ——————————————————————————————— 
+       7. Prévisualisation & code 
+    ——————————————————————————————— */
+    #previewFrame {
+      width: 100%;
+      min-height: 120px;
+      border-radius: 4px;
+      margin: 0.7rem 0 1.5rem;
+      border: 1px solid #ccc;
+      background: #fafafa;
+      resize: vertical;
+    }
+    #codeOutput {
+      width: 100%;
+      min-height: 160px;
+      margin-top: 0.7rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-family: 'Red Hat Display', monospace;
+      font-size: 1.04rem;
+      padding: 16px;
+      background: #fff;
+      resize: vertical;
+    }
+
+    /* ——————————————————————————————— 
+       8. Responsive 
+    ——————————————————————————————— */
+    @media (max-width: 700px) {
+      .btn-generator-main {
+        max-width: 97vw;
+        padding: 0 0.7rem;
+      }
+      .btn-generator-main .color-row {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <aside id="sidebar" class="sidebar"></aside>
-
   <main class="content">
-    <div class="container">
+    <div class="container btn-generator-main">
       <h1>Générateur de bouton Shorthand</h1>
-      <!-- Générateur content (conserve les mêmes éléments) -->
-      <!-- ... -->
+
+      <label><input type="checkbox" id="withBackground"> Utiliser une image de fond</label>
+
+      <label for="url">Lien URL du bouton</label>
+      <input type="url" id="url" placeholder="https://...">
+
+      <label>Texte du bouton</label>
+      <div id="text" class="editable" contenteditable>Découvrir le reportage</div>
+
+      <div class="format-buttons">
+        <button data-cmd="bold"  type="button"><b>G</b></button>
+        <button data-cmd="italic" type="button"><i>I</i></button>
+        <button data-cmd="underline" type="button"><u>S</u></button>
+      </div>
+
+      <div class="color-row">
+        <div class="color-input">
+          <label for="btnColorPicker">Couleur du bouton</label>
+          <input type="color" id="btnColorPicker" value="#D51D2C">
+          <input type="text"  id="btnColor"       value="#D51D2C">
+        </div>
+        <div class="color-input">
+          <label for="textColorPicker">Couleur du texte</label>
+          <input type="color" id="textColorPicker" value="#ffffff">
+          <input type="text"  id="textColor"       value="#ffffff">
+        </div>
+      </div>
+
+      <div id="bgFields" style="display:none;">
+        <label for="bgImage">Lien de l'image de fond</label>
+        <input type="url" id="bgImage" placeholder="https://...">
+
+        <label>Titre au-dessus du bouton</label>
+        <div id="overlayTitle" class="editable" contenteditable></div>
+        <div class="format-buttons">
+          <button data-cmd="bold"    data-target="overlayTitle"  type="button"><b>G</b></button>
+          <button data-cmd="italic"  data-target="overlayTitle"  type="button"><i>I</i></button>
+          <button data-cmd="underline" data-target="overlayTitle" type="button"><u>S</u></button>
+        </div>
+      </div>
+
+      <!-- Toggle avancées -->
+      <a href="#" id="advancedOptionsToggle" class="toggle-link">
+        Afficher les options avancées
+      </a>
+
+      <div id="advancedOptions">
+        <label for="blurPercent">Flou (%)</label>
+        <input type="number" id="blurPercent" value="0" min="0" max="100">
+
+        <label for="blockHeight">Hauteur du bloc</label>
+        <input type="text" id="blockHeight" value="250px">
+
+        <label>Effet au survol du bouton</label>
+        <div class="advanced-row" style="margin-bottom:1rem;">
+          <label><input type="radio" name="hoverEffect" value="darken" checked> Foncer</label>
+          <label><input type="radio" name="hoverEffect" value="lighten"> Éclaircir</label>
+        </div>
+
+        <div class="color-row">
+          <div class="color-input">
+            <label for="buttonWidth">Largeur du bouton</label>
+            <input type="text" id="buttonWidth" value="250px">
+          </div>
+          <div class="color-input">
+            <label for="buttonHeight">Hauteur du bouton</label>
+            <input type="text" id="buttonHeight" value="55px">
+          </div>
+        </div>
+
+        <label for="borderRadius">Border-radius</label>
+        <input type="text" id="borderRadius" value="4px">
+
+        <label for="buttonFontSize">Taille texte bouton</label>
+        <input type="text" id="buttonFontSize" value="20px">
+
+        <label for="titleFontSize">Taille titre</label>
+        <input type="text" id="titleFontSize" value="30px">
+
+        <div class="color-row">
+          <div class="color-input">
+            <label for="titleFontFamily">Police titre</label>
+            <select id="titleFontFamily">
+              <option value="'Red Hat Display',sans-serif">Red Hat Display</option>
+              <option value="'Crimson Pro',serif">Crimson Pro</option>
+            </select>
+          </div>
+          <div class="color-input">
+            <label for="titleColorPicker">Couleur titre</label>
+            <input type="color" id="titleColorPicker" value="#000000">
+            <input type="text"  id="titleColor"       value="#000000">
+          </div>
+        </div>
+
+        <label for="titleSpacing">Espacement titre-bouton</label>
+        <input type="text" id="titleSpacing" value="20px">
+
+        <!-- Bouton Générer à l’intérieur du panel avancé -->
+        <button class="generate" type="button">Générer le code</button>
+      </div>
+
+      <!-- Lorsqu’avancées fermées, on génère ici -->
+      <button class="generate" type="button" id="generateOutside">
+        Générer le code
+      </button>
+
+      <label for="previewFrame">Prévisualisation du bouton :</label>
+      <iframe id="previewFrame" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+
+      <button class="copy" type="button">Copier le code</button>
+
+      <label for="codeOutput">Code HTML</label>
+      <textarea id="codeOutput" readonly></textarea>
     </div>
   </main>
 
-  <!-- Sidebar include -->
   <script>
+    // Toggle options avancées + active class
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleLink   = document.getElementById('advancedOptionsToggle');
+      const advanced     = document.getElementById('advancedOptions');
+      const genInside    = advanced.querySelector('.generate');
+      const genOutside   = document.getElementById('generateOutside');
+      let visible = false;
+
+      toggleLink.onclick = function(e) {
+        e.preventDefault();
+        visible = !visible;
+        advanced.style.display = visible ? 'block' : 'none';
+        toggleLink.textContent = visible
+          ? 'Cacher les options avancées'
+          : 'Afficher les options avancées';
+        toggleLink.classList.toggle('active', visible);
+
+        // On n'affiche qu'un seul bouton Générer
+        genInside.style.display  = visible ? 'block' : 'none';
+        genOutside.style.display = visible ? 'none'  : 'block';
+      };
+
+      // État initial
+      genInside.style.display  = 'none';
+      genOutside.style.display = 'block';
+    });
+
+    // Sidebar dynamique
     fetch('/includes/sidebar.html')
       .then(r => r.text())
       .then(html => document.getElementById('sidebar').innerHTML = html);
   </script>
+
   <!-- App JS -->
   <script type="module" src="/js/app.js" defer></script>
 </body>
