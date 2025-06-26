@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Générateur de bouton Shorthand</title>
+
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&family=Crimson+Pro:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Main CSS (chemins relatifs pour S3) -->
+  <link rel="stylesheet" href="css/main.css">
 
   <style>
-    /* ——————————————————————————————— 
-       CONTENEUR PRINCIPAL 
-    ——————————————————————————————— */
+    /* 1. Conteneur principal */
     .btn-generator-main {
       max-width: 900px;
       margin: 2rem auto;
@@ -25,9 +25,7 @@
       display: block;
     }
 
-    /* ——————————————————————————————— 
-       1. Champs & zones éditables 
-    ——————————————————————————————— */
+    /* 2. Champs & zones éditables */
     .btn-generator-main input[type="text"],
     .btn-generator-main input[type="url"],
     .btn-generator-main input[type="number"],
@@ -52,9 +50,7 @@
       margin: 0.25rem 0 1rem;
     }
 
-    /* ——————————————————————————————— 
-       2. Boutons de formatage (G / I / S) 
-    ——————————————————————————————— */
+    /* 3. Boutons de formatage (G / I / S) */
     .btn-generator-main .format-buttons {
       display: flex;
       gap: 0.5rem;
@@ -78,9 +74,7 @@
       background: #f0f0f0;
     }
 
-    /* ——————————————————————————————— 
-       3. Ligne Couleur (bouton & texte) 
-    ——————————————————————————————— */
+    /* 4. Ligne Couleur (bouton & texte) */
     .btn-generator-main .color-row {
       display: flex;
       gap: 2rem;
@@ -91,7 +85,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 0;
     }
     .btn-generator-main .color-input label {
       flex-basis: 110px;
@@ -114,13 +107,11 @@
       margin: 0;
     }
 
-    /* ——————————————————————————————— 
-       4. Lien “Afficher/Cacher les options avancées” 
-    ——————————————————————————————— */
+    /* 5. Toggle “Afficher/Cacher” */
     .toggle-link {
       display: inline-block;
       padding: 0.4rem 0.8rem;
-      margin: 1rem 0 0.5rem 0;
+      margin: 1rem 0 0.5rem;
       color: #D51D2C;
       border: 1px solid #D51D2C;
       border-radius: 4px;
@@ -142,9 +133,7 @@
       background: rgba(0,94,184,0.1);
     }
 
-    /* ——————————————————————————————— 
-       5. Conteneur options avancées 
-    ——————————————————————————————— */
+    /* 6. Conteneur options avancées */
     #advancedOptions {
       display: none;
       background: #f7f7f7;
@@ -154,11 +143,8 @@
       margin-bottom: 1.5rem;
     }
 
-    /* ——————————————————————————————— 
-       6. Boutons Générer / Copier 
-    ——————————————————————————————— */
-    .generate,
-    .copy {
+    /* 7. Boutons Générer / Copier */
+    .generate, .copy {
       display: block;
       width: 240px;
       padding: 0.9rem 1.4rem;
@@ -172,14 +158,11 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .generate:hover,
-    .copy:hover {
+    .generate:hover, .copy:hover {
       background: #C21A26;
     }
 
-    /* ——————————————————————————————— 
-       7. Prévisualisation & code 
-    ——————————————————————————————— */
+    /* 8. Prévisualisation & code */
     #previewFrame {
       width: 100%;
       min-height: 120px;
@@ -202,9 +185,7 @@
       resize: vertical;
     }
 
-    /* ——————————————————————————————— 
-       8. Responsive 
-    ——————————————————————————————— */
+    /* 9. Responsive */
     @media (max-width: 700px) {
       .btn-generator-main {
         max-width: 97vw;
@@ -224,17 +205,21 @@
     <div class="container btn-generator-main">
       <h1>Générateur de bouton Shorthand</h1>
 
-      <label><input type="checkbox" id="withBackground"> Utiliser une image de fond</label>
+      <label>
+        <input type="checkbox" id="withBackground"> Utiliser une image de fond
+      </label>
 
       <label for="url">Lien URL du bouton</label>
       <input type="url" id="url" placeholder="https://...">
 
       <label>Texte du bouton</label>
-      <div id="text" class="editable" contenteditable>Découvrir le reportage</div>
+      <div id="text" class="editable" contenteditable>
+        Découvrir le reportage
+      </div>
 
       <div class="format-buttons">
-        <button data-cmd="bold"  type="button"><b>G</b></button>
-        <button data-cmd="italic" type="button"><i>I</i></button>
+        <button data-cmd="bold"    type="button"><b>G</b></button>
+        <button data-cmd="italic"  type="button"><i>I</i></button>
         <button data-cmd="underline" type="button"><u>S</u></button>
       </div>
 
@@ -264,7 +249,7 @@
         </div>
       </div>
 
-      <!-- Toggle avancées -->
+      <!-- Toggle options avancées -->
       <a href="#" id="advancedOptionsToggle" class="toggle-link">
         Afficher les options avancées
       </a>
@@ -320,13 +305,13 @@
         <label for="titleSpacing">Espacement titre-bouton</label>
         <input type="text" id="titleSpacing" value="20px">
 
-        <!-- Bouton Générer à l’intérieur du panel avancé -->
+        <!-- Bouton Générer à l’intérieur du panneau avancé -->
         <button id="generateInside" class="generate" type="button">
           Générer le code
         </button>
       </div>
 
-      <!-- Bouton Générer hors du panel avancé -->
+      <!-- Bouton Générer hors du panneau avancé -->
       <button id="generateOutside" class="generate" type="button">
         Générer le code
       </button>
@@ -345,48 +330,44 @@
     document.addEventListener('DOMContentLoaded', function() {
       const toggleLink  = document.getElementById('advancedOptionsToggle');
       const advanced    = document.getElementById('advancedOptions');
-      const genOutside  = document.getElementById('generateOutside');
       const genInside   = document.getElementById('generateInside');
-      let visible = false;
+      const genOutside  = document.getElementById('generateOutside');
 
-      // Si un élément manque, on ne plante pas
-      if (!toggleLink || !advanced || !genOutside || !genInside) return;
+      if (!toggleLink || !advanced || !genInside || !genOutside) return;
 
       // État initial
-      genInside.style.display  = 'none';
-      genOutside.style.display = 'block';
+      advanced.style.display    = 'none';
+      genInside.style.display   = 'none';
+      genOutside.style.display  = 'block';
 
-      // Toggle du panneau
+      // Toggle du panneau avancé
       toggleLink.addEventListener('click', function(e) {
         e.preventDefault();
-        visible = !visible;
-
-        advanced.style.display = visible ? 'block' : 'none';
-        toggleLink.textContent = visible
-          ? 'Cacher les options avancées'
-          : 'Afficher les options avancées';
-        toggleLink.classList.toggle('active', visible);
-
-        genInside.style.display  = visible ? 'block' : 'none';
-        genOutside.style.display = visible ? 'none'  : 'block';
+        const ouvert = advanced.style.display === 'none';
+        advanced.style.display    = ouvert ? 'block' : 'none';
+        toggleLink.textContent    = ouvert
+                                  ? 'Cacher les options avancées'
+                                  : 'Afficher les options avancées';
+        toggleLink.classList.toggle('active', ouvert);
+        genInside.style.display   = ouvert ? 'block' : 'none';
+        genOutside.style.display  = ouvert ? 'none'  : 'block';
       });
 
-      // Proxy : le clic intérieur déclenche le clic extérieur
+      // Proxy : clic intérieur → clic extérieur
       genInside.addEventListener('click', function(e) {
         e.preventDefault();
         genOutside.click();
       });
+
+      // Chargement du sidebar (chemin relatif)
+      fetch('includes/sidebar.html')
+        .then(r => r.ok ? r.text() : '')
+        .then(html => { if (html) document.getElementById('sidebar').innerHTML = html; })
+        .catch(() => {});
     });
   </script>
 
-  <script>
-    // Sidebar dynamique
-    fetch('/includes/sidebar.html')
-      .then(r => r.text())
-      .then(html => document.getElementById('sidebar').innerHTML = html);
-  </script>
-
-  <!-- App JS -->
-  <script type="module" src="/js/app.js" defer></script>
+  <!-- App JS (chemin relatif) -->
+  <script type="module" src="js/app.js" defer></script>
 </body>
 </html>
