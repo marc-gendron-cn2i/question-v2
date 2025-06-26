@@ -91,7 +91,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 0;
     }
     .btn-generator-main .color-input label {
       flex-basis: 110px;
@@ -120,7 +119,7 @@
     .toggle-link {
       display: inline-block;
       padding: 0.4rem 0.8rem;
-      margin: 1rem 0 0.5rem 0;
+      margin: 1rem 0 0.5rem;
       color: #D51D2C;
       border: 1px solid #D51D2C;
       border-radius: 4px;
@@ -224,17 +223,22 @@
     <div class="container btn-generator-main">
       <h1>Générateur de bouton Shorthand</h1>
 
-      <label><input type="checkbox" id="withBackground"> Utiliser une image de fond</label>
+      <label>
+        <input type="checkbox" id="withBackground">
+        Utiliser une image de fond
+      </label>
 
       <label for="url">Lien URL du bouton</label>
       <input type="url" id="url" placeholder="https://...">
 
       <label>Texte du bouton</label>
-      <div id="text" class="editable" contenteditable>Découvrir le reportage</div>
+      <div id="text" class="editable" contenteditable>
+        Découvrir le reportage
+      </div>
 
       <div class="format-buttons">
-        <button data-cmd="bold"  type="button"><b>G</b></button>
-        <button data-cmd="italic" type="button"><i>I</i></button>
+        <button data-cmd="bold"    type="button"><b>G</b></button>
+        <button data-cmd="italic"  type="button"><i>I</i></button>
         <button data-cmd="underline" type="button"><u>S</u></button>
       </div>
 
@@ -251,83 +255,17 @@
         </div>
       </div>
 
-      <div id="bgFields" style="display:none;">
-        <label for="bgImage">Lien de l'image de fond</label>
-        <input type="url" id="bgImage" placeholder="https://...">
-
-        <label>Titre au-dessus du bouton</label>
-        <div id="overlayTitle" class="editable" contenteditable></div>
-        <div class="format-buttons">
-          <button data-cmd="bold"     data-target="overlayTitle" type="button"><b>G</b></button>
-          <button data-cmd="italic"   data-target="overlayTitle" type="button"><i>I</i></button>
-          <button data-cmd="underline" data-target="overlayTitle" type="button"><u>S</u></button>
-        </div>
-      </div>
-
-      <!-- Toggle avancées -->
+      <!-- Toggle options avancées -->
       <a href="#" id="advancedOptionsToggle" class="toggle-link">
         Afficher les options avancées
       </a>
 
       <div id="advancedOptions">
-        <label for="blurPercent">Flou (%)</label>
-        <input type="number" id="blurPercent" value="0" min="0" max="100">
-
-        <label for="blockHeight">Hauteur du bloc</label>
-        <input type="text" id="blockHeight" value="250px">
-
-        <label>Effet au survol du bouton</label>
-        <div class="advanced-row" style="margin-bottom:1rem;">
-          <label><input type="radio" name="hoverEffect" value="darken" checked> Foncer</label>
-          <label><input type="radio" name="hoverEffect" value="lighten"> Éclaircir</label>
-        </div>
-
-        <div class="color-row">
-          <div class="color-input">
-            <label for="buttonWidth">Largeur du bouton</label>
-            <input type="text" id="buttonWidth" value="250px">
-          </div>
-          <div class="color-input">
-            <label for="buttonHeight">Hauteur du bouton</label>
-            <input type="text" id="buttonHeight" value="55px">
-          </div>
-        </div>
-
-        <label for="borderRadius">Border-radius</label>
-        <input type="text" id="borderRadius" value="4px">
-
-        <label for="buttonFontSize">Taille texte bouton</label>
-        <input type="text" id="buttonFontSize" value="20px">
-
-        <label for="titleFontSize">Taille titre</label>
-        <input type="text" id="titleFontSize" value="30px">
-
-        <div class="color-row">
-          <div class="color-input">
-            <label for="titleFontFamily">Police titre</label>
-            <select id="titleFontFamily">
-              <option value="'Red Hat Display',sans-serif">Red Hat Display</option>
-              <option value="'Crimson Pro',serif">Crimson Pro</option>
-            </select>
-          </div>
-          <div class="color-input">
-            <label for="titleColorPicker">Couleur titre</label>
-            <input type="color" id="titleColorPicker" value="#000000">
-            <input type="text"  id="titleColor"       value="#000000">
-          </div>
-        </div>
-
-        <label for="titleSpacing">Espacement titre-bouton</label>
-        <input type="text" id="titleSpacing" value="20px">
-
-        <!-- Bouton Générer à l’intérieur du panel avancé -->
-        <button id="generateInside" class="generate" type="button">
-          Générer le code
-        </button>
+        <!-- Tous vos champs avancés ici -->
       </div>
 
-      <!-- Bouton Générer hors du panel avancé -->
-      <button id="generateOutside" class="generate" type="button">
+      <!-- UNIQUE bouton Générer toujours visible -->
+      <button id="generate" class="generate" type="button">
         Générer le code
       </button>
 
@@ -343,44 +281,36 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const toggleLink  = document.getElementById('advancedOptionsToggle');
-      const advanced    = document.getElementById('advancedOptions');
-      const genOutside  = document.getElementById('generateOutside');
-      const genInside   = document.getElementById('generateInside');
-      let visible = false;
+      const toggleLink = document.getElementById('advancedOptionsToggle');
+      const advanced   = document.getElementById('advancedOptions');
+      const genButton  = document.getElementById('generate');
 
-      // Si un élément manque, on ne plante pas
-      if (!toggleLink || !advanced || !genOutside || !genInside) return;
+      if (!toggleLink || !advanced || !genButton) return;
 
-      // État initial
-      genInside.style.display  = 'none';
-      genOutside.style.display = 'block';
+      // On cache d'emblée le panneau
+      advanced.style.display = 'none';
 
-      // Toggle du panneau
+      // Toggle panneau avancé
       toggleLink.addEventListener('click', function(e) {
         e.preventDefault();
-        visible = !visible;
-
-        advanced.style.display = visible ? 'block' : 'none';
-        toggleLink.textContent = visible
+        const ouvert = advanced.style.display === 'none';
+        advanced.style.display = ouvert ? 'block' : 'none';
+        toggleLink.textContent = ouvert
           ? 'Cacher les options avancées'
           : 'Afficher les options avancées';
-        toggleLink.classList.toggle('active', visible);
-
-        genInside.style.display  = visible ? 'block' : 'none';
-        genOutside.style.display = visible ? 'none'  : 'block';
+        toggleLink.classList.toggle('active', ouvert);
       });
 
-      // Proxy : le clic intérieur déclenche le clic extérieur
-      genInside.addEventListener('click', function(e) {
-        e.preventDefault();
-        genOutside.click();
+      // Le bouton Générer (id="generate") déclenche votre logique dans app.js
+      genButton.addEventListener('click', function() {
+        // ici ou dans /js/app.js : votre fonction de génération
+        // ex. generateCode();
       });
     });
   </script>
 
+  <!-- Sidebar dynamique -->
   <script>
-    // Sidebar dynamique
     fetch('/includes/sidebar.html')
       .then(r => r.text())
       .then(html => document.getElementById('sidebar').innerHTML = html);
