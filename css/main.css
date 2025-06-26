@@ -437,6 +437,42 @@ select {
   min-width: 0;        /* important pour que flex-shrink fonctionne */
 }
 
+/* ─── Uniformisation de la hauteur des champs ─── */
+/* Même hauteur que les selects et les date/time (≈44px) */
+.inline-inputs input[type="url"],
+.inline-inputs input[type="text"],
+.color-row input[type="color"],
+.color-row input[type="text"],
+.advanced-options input[type="number"],
+.advanced-options input[type="text"],
+.advanced-options select {
+  height: 44px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* ─── Champs URL et Texte pleine largeur ─── */
+.inline-inputs > div {
+  flex: 1;            /* chaque colonne prend tout l’espace dispo */
+  min-width: 0;       /* pour que le flex-shrink fonctionne */
+}
+.inline-inputs > div input {
+  width: 100%;        /* input occupe toute sa colonne */
+}
+
+/* ─── Rappel de style pour .inline-inputs ─── */
+.inline-inputs {
+  display: flex;
+  flex-direction: column;   /* on veut URL et Texte chacun sur sa ligne */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* si vous avez d’autres .inline-inputs (comme en analytics) : */
+.inline-inputs.horizontal {
+  flex-direction: row;      /* pour les autres pages qui utilisent une disposition en rangée */
+}
+
 
 /* ===== Page: Outils numériques ===== */
 .tools-grid {
