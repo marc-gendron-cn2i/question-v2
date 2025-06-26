@@ -399,6 +399,44 @@ select {
   border-radius: 4px;
   font-family: inherit;
 }
+/* === Forcer URL & Texte à 100% de large et sur leur propre ligne === */
+.inline-inputs {
+  display: flex;
+  flex-wrap: wrap;    /* autorise le retour à la ligne */
+  gap: 1rem;
+}
+.inline-inputs > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* Les 2e et 3e div de inline-inputs (URL + Texte) prennent 100% */
+.inline-inputs > div:nth-child(2),
+.inline-inputs > div:nth-child(3) {
+  flex-basis: 100%;
+}
+/* ─── Ajustement Police titre vs Couleur titre ─── */
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Police titre (select) plus étroit */
+#fontFamily {
+  flex: 0 0 180px;     /* largeur fixe à 180px */
+  max-width: 30%;      /* ne pas dépasser 30% du container */
+}
+
+/* Color picker fixe, mais le champ hexadécimal prend le reste */
+#titleColor {
+  flex: 0 0 auto;      /* conserve sa taille native */
+}
+#titleColorHex {
+  flex: 1 1 auto;      /* prend tout l’espace restant */
+  min-width: 0;        /* important pour que flex-shrink fonctionne */
+}
+
 
 /* ===== Page: Outils numériques ===== */
 .tools-grid {
