@@ -16,10 +16,11 @@
 
   <!-- Main content -->
   <main class="content">
-    <div class="container">
+    <div class="container" style="max-width:900px; margin: 0 auto;">
+      
       <h1>Générateur de bouton</h1>
 
-      <!-- 1) Checkbox + URL + Texte -->
+      <!-- 1) Checkbox / URL / Texte sur la même ligne -->
       <div class="inline-inputs">
         <div>
           <label>
@@ -37,17 +38,14 @@
         </div>
       </div>
 
-      <!-- 2) Zone éditable pour voir le rendu du texte -->
-      <div class="editable" contenteditable="true" placeholder="Écrire..." id="textPreview"></div>
-
-      <!-- 3) Boutons de mise en forme -->
+      <!-- 2) Barre de mise en forme -->
       <div class="format-buttons">
         <button type="button" class="bold"><i class="fa-solid fa-bold"></i></button>
         <button type="button" class="italic"><i class="fa-solid fa-italic"></i></button>
         <button type="button" class="underline"><i class="fa-solid fa-underline"></i></button>
       </div>
 
-      <!-- 4) Couleurs -->
+      <!-- 3) Couleurs sur la même ligne -->
       <div class="color-row">
         <div>
           <label for="bgColor">Couleur du bouton</label>
@@ -61,13 +59,13 @@
         </div>
       </div>
 
-      <!-- 5) Afficher les options avancées -->
+      <!-- 4) Lien pour basculer options avancées -->
       <div class="advanced-toggle-row">
-        <a href="#" class="show-advanced-toggle">Afficher les options avancées</a>
+        <a href="#" id="toggleAdvanced">Afficher les options avancées</a>
       </div>
 
-      <!-- 6) Bloc des options avancées (masqué par défaut) -->
-      <div id="advancedOptions" class="advanced-options" style="display: none;">
+      <!-- 5) Bloc options avancées (caché par défaut) -->
+      <div id="advancedOptions" class="advanced-options" style="display:none;">
         <div class="option-row">
           <label for="blur">Flou (%)</label>
           <input type="number" id="blur" min="0" max="100" value="0">
@@ -108,38 +106,38 @@
         </div>
       </div>
 
-      <!-- 7) Bouton Générer -->
+      <!-- 6) Bouton Générer -->
       <div class="action-row">
-        <button type="button" class="generate">Générer le code</button>
+        <button type="button" class="btn generate">Générer le code</button>
       </div>
 
-      <!-- 8) Prévisualisation -->
+      <!-- 7) Prévisualisation -->
       <div class="preview-row">
         <label>Prévisualisation du bouton :</label>
         <iframe id="buttonPreview" title="Prévisualisation"></iframe>
       </div>
 
-      <!-- 9) Bouton Copier -->
+      <!-- 8) Bouton Copier -->
       <div class="action-row">
-        <button type="button" class="copy">Copier le code</button>
+        <button type="button" class="btn copy">Copier le code</button>
       </div>
 
-      <!-- 10) Code HTML généré -->
+      <!-- 9) Code HTML généré -->
       <div class="output-row">
         <label for="htmlOutput">Code HTML</label>
         <textarea id="htmlOutput" readonly></textarea>
       </div>
+
     </div>
   </main>
 
-  <!-- Include Sidebar -->
+  <!-- Sidebar include -->
   <script>
     fetch('/includes/sidebar.html')
       .then(r => r.text())
       .then(html => document.getElementById('sidebar').innerHTML = html);
   </script>
-
-  <!-- Votre script de génération de bouton (modifiez le chemin si besoin) -->
+  <!-- Votre script de génération (vérifiez bien le chemin !) -->
   <script type="module" src="/js/buttonGen.js" defer></script>
 </body>
 </html>
